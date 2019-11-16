@@ -7,7 +7,7 @@ from appium.webdriver.common.mobileby import By
 from appium.webdriver.common.mobileby import MobileBy
 from appium.webdriver.common.touch_action import TouchAction
 from time import sleep
-from datautils.page_objects import * 
+from DataUtils import *
 
 user_email = "fmui_testing@legrand.us"
 user_password = "Testing1"
