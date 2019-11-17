@@ -2,6 +2,7 @@ import os
 import traceback
 import datetime
 import time
+# Import tests   FileName as Class
 import TestSuite.Login as LoginTest
 from Methods.run_test import test_run
 from time import sleep
@@ -15,7 +16,7 @@ fails = []
 trace = []
 tests = [
 
-    # Example test account creation  classname.classname()method
+    # Example test account creation  Class.Class()method
     LoginTest.LoginTest().testLogin,
 
 ]

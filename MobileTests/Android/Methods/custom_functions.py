@@ -7,7 +7,7 @@ from appium.webdriver.common.mobileby import By
 from appium.webdriver.common.mobileby import MobileBy
 from appium.webdriver.common.touch_action import TouchAction
 from time import sleep
-from DataUtils import *
+from DataUtils.PageObjects import *
 
 user_email = "fmui_testing@legrand.us"
 user_password = "Testing1"
@@ -50,7 +50,13 @@ def add_new_category(self, text):
         print(f'Category {text} successfully added')
     else: 
         raise AssertionError(f'Category {text} was not created')
-            
+
+def login_error_check(self, text):
+    self.driver.find_element_by_xpath(login_page_login_button).click()
+    self.driver.find_element_by_xpath(login_invalid_text).is_displayed()
+    err = self.driver.find_element_by_xpath(login_invalid_text).text
+    self.assertEquals(err, text ,"Wrong error message is displayed")
+    self.driver.find_element_by_xpath(login_invalid_ok).click()    
 
 
 def user_login(self, email, password):
@@ -88,87 +94,6 @@ def search_bar(self, text):
     self.driver.execute_script("mobile:performEditorAction", {'action': 'go'})
     # self.driver.hide_keyboard()
     self.driver.implicitly_wait(10)
-
-def five_tap_for_enviroment(self):
-    TouchAction(self.driver).tap(x=700, y=1900).perform()
-    TouchAction(self.driver).tap(x=700, y=1900).perform()
-    TouchAction(self.driver).tap(x=700, y=1900).perform()
-    TouchAction(self.driver).tap(x=700, y=1900).perform()
-    TouchAction(self.driver).tap(x=700, y=1900).perform()
-
-def tap_code_to_switch_enviroments(self):
-    TouchAction(self.driver).tap(x=210, y=370).perform()
-    TouchAction(self.driver).tap(x=210, y=370).perform()
-    TouchAction(self.driver).tap(x=1400, y=1400).perform()
-    TouchAction(self.driver).tap(x=210, y=370).perform()
-    TouchAction(self.driver).tap(x=210, y=370).perform()
-    TouchAction(self.driver).tap(x=130, y=1300).perform()
-    TouchAction(self.driver).tap(x=1300, y=330).perform()
-    TouchAction(self.driver).tap(x=130, y=1300).perform()
-    TouchAction(self.driver).tap(x=210, y=370).perform()
-    TouchAction(self.driver).tap(x=1400, y=1400).perform()
-    TouchAction(self.driver).tap(x=1300, y=330).perform()
-
-def switch_enviroment(self):
-    """
-    Following Switching Enviroments test Case in Other Test SUite
-    https://lncasoftware.ontestpad.com/script/1088#//
-    """
-    self.driver.hide_keyboard()
-    self.driver.implicitly_wait(10)
-    # Open the app.
-    self.driver.find_element_by_xpath(l_page_ident).is_displayed()
-    self.driver.implicitly_wait(10)
-    # Rapidly click 5 times near the bottom of the window of the Login screen.
-    five_tap_for_enviroment(self)
-    
-    self.driver.implicitly_wait(10)
-    # Verify that an overlay with 4 buttons is displayed over the Login screen.
-    """
-    --The buttons are labelled as follows:
-    |  1  |  2  |
-    -------------
-    |  3  |  4  |
-    """
-    # Verify that the overlay displays a box on the bottom of the window with the current environment (the default appears to be PROD, the other option available is DEV).
-    self.assertTrue(visible_xpath_assert(self, element= '/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.Button'),'overlay is not displayed, error in trying to switch enviroment')
-    find_by_text(self, text='DEV')
-    print('Enviroment Switching is now available')
-
-    # Click the following code on the buttons: 1 1 4 1 1 3 2 3 1 4 2.
-    tap_code_to_switch_enviroments(self)
-
-    self.driver.implicitly_wait(10)
-
-    # Verify that the box on the bottom displays the new server. 
-    self.assertTrue(self.driver.find_element_by_xpath('/hierarchy/android.widget.FrameLayout/android.widget.LinearLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.FrameLayout/android.widget.RelativeLayout/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup[4]/android.widget.Button').is_displayed())
-    find_by_text(self, text='PROD')
-    print('Enviroment Has Now Been Switched To PROD')
-
-    # Click the box on the bottom to close the overlay.
-    click_text(self, text='PROD')
-    self.driver.implicitly_wait(10)
-
-    # Login using the correct credentials.
-    self.assertTrue(self.driver.find_element_by_xpath(l_page_ident).is_displayed())
-
-def help_check(self, help_msg):
-    # Click the Help button.
-    print('Click the Help button.')
-    self.driver.find_element_by_xpath(d_help_box).click()
-    print('>>  help btn clicked')
-    
-    # Verify that the correct Help popup is displayed.
-    print('Verify that the correct Help popup is displayed.')
-    self.driver.implicitly_wait(10)
-    sites_help_text = self.driver.find_element_by_xpath(help_sites_msg).text
-    self.assertEqual(sites_help_text, help_msg)
-    print('>>  correct Help popup is displayed')   
-    
-    # select dismiss btn
-    print('select dismiss btn')
-    self.driver.find_element_by_xpath(help_dismiss_btn).click()
-    print('>>  dismiss btn selected')
 
 def loc_search_key(self):
     self.driver.implicitly_wait(10)
@@ -230,111 +155,22 @@ def site_cards(self):
             break
     return card_list
 
-def update_cards(self):
-    self.driver.implicitly_wait(5000)
-    card_list = []
-    xpath = '(//android.widget.TextView[@content-desc="ModifiedDateLabel"])['
-    xpathend = "]"
-    for index in range(1, 20):
-        path = f"{xpath}{index}{xpathend}"
-        self.driver.implicitly_wait(1)
-        if len(self.driver.find_elements(By.XPATH, path)) > 0:
-            self.driver.implicitly_wait(1)
-            card_list.append(self.driver.find_element_by_xpath(f"{xpath}{index}{xpathend}").text)
-        else:
-            break
-    return card_list
-
-def city_cards(self):
-    self.driver.implicitly_wait(5000)
-    card_list = []
-    xpath = '(//android.widget.TextView[@content-desc="CityLabel"])['
-    xpathend = "]"
-    for index in range(1, 20):
-        path = f"{xpath}{index}{xpathend}"
-        self.driver.implicitly_wait(1)
-        if len(self.driver.find_elements(By.XPATH, path)) > 0:
-            self.driver.implicitly_wait(1)
-            card_list.append(self.driver.find_element_by_xpath(f"{xpath}{index}{xpathend}").text)
-        else:
-            break
-    return card_list
-
-def state_cards(self):
-    self.driver.implicitly_wait(5000)
-    card_list = []
-    xpath = '(//android.widget.TextView[@content-desc="StateLabel"])['
-    xpathend = "]"
-    for index in range(1, 20):
-        path = f"{xpath}{index}{xpathend}"
-        self.driver.implicitly_wait(1)
-        if len(self.driver.find_elements(By.XPATH, path)) > 0:
-            self.driver.implicitly_wait(1)
-            card_list.append(self.driver.find_element_by_xpath(f"{xpath}{index}{xpathend}").text)
-        else:
-            break
-    return card_list
-
-def category_title_card(self): 
-    self.driver.implicitly_wait(10)
-    card_list = []
-    xpath = ''
-    xpathend = ''
-    for index in range(1, 20):
-        path = f"{xpath}{index}{xpathend}"
-        self.driver.implicitly_wait(1)
-        if len(self.driver.find_elements(By.XPATH, path)) > 0:
-            self.driver.implicitly_wait(1)
-            card_list.append(self.driver.find_element_by_xpath(f"{xpath}{index}{xpathend}").text)
-        else:
-            break
-    return card_list
-
-def holiday_title_card(self): 
-    self.driver.implicitly_wait(10)
-    card_list = []
-    xpath = ''
-    xpathend = ''
-    for index in range(1, 20):
-        path = f"{xpath}{index}{xpathend}"
-        self.driver.implicitly_wait(1)
-        if len(self.driver.find_elements(By.XPATH, path)) > 0:
-            self.driver.implicitly_wait(1)
-            card_list.append(self.driver.find_element_by_xpath(f"{xpath}{index}{xpathend}").text)
-        else:
-            break
-    return card_list
-
 def item_groupings(self, item_type):
     item_type_list = []
     if item_type == "RC":
-        item_type_list.append("LMRC-611MCC")
+        item_type_list.append("")
     elif item_type == "SW":
-        item_type_list.append('LMSW-605')
-        item_type_list.append('LMDM-601')
+        item_type_list.append('')
+        item_type_list.append('')
     elif item_type == "OS":
-        item_type_list.append("LMPC-600")
-        item_type_list.append("LMPX-600")
+        item_type_list.append("")
+        item_type_list.append("")
     elif item_type == "DL":
-        item_type_list.append("LMDL-600")
+        item_type_list.append("")
     elif item_type == "LO":
         print('Loads Dont Exist Yet ^.^')
         
     return item_type_list
-
-def user_logout(self):
-    self.driver.implicitly_wait(10)
-    self.driver.find_element_by_accessibility_id(m_logout_btn).click()
-    logout_yes = self.driver.find_element_by_id('android:id/button1') 
-    logout_yes.click()
-    self.driver.implicitly_wait(10)
-
-def user_settings(self):
-    self.driver.implicitly_wait(10)
-    if visible_xpath_assert(self, element= m_menu_btn2) == True:
-        self.driver.find_element_by_xpath(m_menu_btn2).click()
-    else:
-        self.driver.find_element_by_xpath(m_menu_btn).click()
 
 def visible_xpath_assert(self, element):        
     self.driver.implicitly_wait(5)
@@ -412,7 +248,7 @@ def get_SMS_string(self):
     print('Message Successfully Deleted!')
 
     print(f'Navigating back to Legrand app your Recoverycode is {recov_code}')
-    self.driver.start_activity('us.legrand.fmui', activity)
+    self.driver.start_activity('', activity)
 
     return recov_code
 
@@ -461,7 +297,7 @@ def get_email_string(self):
 
     # go back to legrand app
     print(f'Navigating back to Legrand app your Recoverycode is {recov_code}')
-    self.driver.start_activity('us.legrand.fmui', activity)
+    self.driver.start_activity('', activity)
 
     return recov_code
 
@@ -480,14 +316,6 @@ def state_assertion(self):
     else: 
         raise AssertionError('State abbreviation is incorrect')
 
-def city_assertion(self): 
-    city_list = ["Pleasant Grove", "American Fork", "Orem"]
-    city = self.driver.find_element_by_xpath(site_city_text).text
-    print(city) 
-    if city in city_list:
-        print('Matches city name')      
-    else: 
-        raise AssertionError('City incorrect')
 def state_func(self): 
     #set up 
     all_states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", 
@@ -496,10 +324,6 @@ def state_func(self):
           "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", 
           "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
     return all_states
-
-def city_func(self): 
-    all_cities = ["Pleasant Grove", "American Fork", "Orem", "PG", "AF"]
-    return all_cities
 
 def rv_card_items(self):
     self.driver.implicitly_wait(2000)
@@ -557,21 +381,3 @@ def search_results(self, text, results_in_list):
         return True
     else:
         return False
-
-def help_check(self, help_msg):
-    # Click the Help button.
-    print('Click the Help button.')
-    self.driver.find_element_by_xpath(d_help_box).click()
-    print('>>  help btn clicked')
-    
-    # Verify that the correct Help popup is displayed.
-    print('Verify that the correct Help popup is displayed.')
-    self.driver.implicitly_wait(10)
-    sites_help_text = self.driver.find_element_by_xpath(help_sites_msg).text
-    self.assertEqual(sites_help_text, help_msg)
-    print('>>  correct Help popup is displayed')   
-    
-    # select dismiss btn
-    print('select dismiss btn')
-    self.driver.find_element_by_accessibility_id(help_dismiss_btn).click()
-    print('>>  dismiss btn selected')

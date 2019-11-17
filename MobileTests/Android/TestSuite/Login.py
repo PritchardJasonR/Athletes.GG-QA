@@ -30,24 +30,123 @@ class LoginTest(unittest.TestCase):
         print("Driver created!")
         print("TEST STARTED!")
 
-        EMAIL = 'Z.Tim.11GXXrasr@outlook.com'
-        PASSWORD = '12345678Test'
-        self.driver.implicitly_wait(20)
-        self.driver.find_element_by_xpath(login_button).is_displayed()
-        self.driver.find_element_by_xpath(login_button).click()
-
-
+        # Constants
+        EMAIL = 'z.timgranger@gmail.com'
+        INVALEMAIL = 'ztim#gmail.co'
+        PASSWORD = 'Qwer1234'
+        INVALPASS = 'rewq4321'
         
-        print('Test is Complete')
+        #Assert Login page loaded
+        print("Assert Login page loaded")
+        self.driver.implicitly_wait(20)
+        sleep(2)
+        self.driver.find_element_by_xpath(home_login_button).is_displayed()
+        print("Login button visible")
 
-        # save the source to XML
-        source = self.driver.page_source.encode('utf-8')
-        with open("dashboard_source.xml", "wb") as file: 
-            file.write(source)
+        #click Button and assert user is at login page
+        print("Click Login Button and assert user is at login page")
+        self.driver.find_element_by_xpath(home_login_button).click()
+        self.assertTrue(visible_xpath_assert(self, element= login_page_title))
+        print("User has navigated to Login Page")
+
+        # Assert Login Page Layout
+        print("Assert Login Page Layout")
+        self.driver.find_element_by_xpath(login_page_title).is_displayed()
+        self.assertTrue(visible_xpath_assert(self, element=login_page_email_icon))
+        self.assertTrue(visible_xpath_assert(self, element=login_page_email_field))
+        self.assertTrue(visible_xpath_assert(self, element=login_page_password_icon))
+        self.assertTrue(visible_xpath_assert(self, element=login_page_password_field))
+        self.assertTrue(visible_xpath_assert(self, element=login_page_login_button))
+        self.assertTrue(visible_xpath_assert(self, element=login_page_forgot_password_button))
+        self.assertTrue(visible_xpath_assert(self, element=login_page_facebook))
+        self.assertTrue(visible_xpath_assert(self, element=login_page_discord))
+        self.assertTrue(visible_xpath_assert(self, element=login_page_twitch))
+        self.assertTrue(visible_xpath_assert(self, element=login_page_twitter))
+        self.assertTrue(visible_xpath_assert(self, element=login_page_youtube))
+        
+        logbutton_text = self.driver.find_element_by_xpath(login_page_login_button).text
+        forgotbutton_text = self.driver.find_element_by_xpath(login_page_forgot_password_button).text
+        facebook_text = self.driver.find_element_by_xpath(login_page_facebook).text
+        discord_text = self.driver.find_element_by_xpath(login_page_discord).text
+        twitch_text = self.driver.find_element_by_xpath(login_page_twitch).text
+        twitter_text = self.driver.find_element_by_xpath(login_page_twitter).text
+        youtube_text = self.driver.find_element_by_xpath(login_page_youtube).text
+
+        self.assertEquals(logbutton_text, "LOG IN")
+        self.assertEquals(forgotbutton_text, "Forgot Password")
+        self.assertEquals(facebook_text,"Log In with Facebook")
+        self.assertEquals(discord_text,"Log In with Discord")
+        self.assertEquals(twitch_text,"Log In with Twitch")
+        self.assertEquals(twitter_text,"Log In with Twitter")
+        self.assertEquals(youtube_text,"Log In with YouTube")
+        print(">> Login Page Layout Test Completed As Passed")
+        
+        # Invalid Login Test
+        
+        # Attempt to login with no credentials
+        print("Attempt to login with no credentials")
+        login_error_check(self, "Invalid login")
+        print("Appropriate errormessage is displayed")
+        
+        # Valid email with no password
+        print("Fill email with Valid select login and assert invalid toast appears")
+        self.driver.find_element_by_xpath(login_page_email_field).send_keys(EMAIL)
+        login_error_check(self, "Invalid login")
+        
+        print("Appropriate errormessage is displayed")
+
+        # Valid email with invalid password
+        print("Valid email with invalid password")
+        self.driver.find_element_by_xpath(login_page_password_field).send_keys(INVALPASS)
+        login_error_check(self, "Invalid login")
+        print("Appropriate errormessage is displayed")
+
+        # Invalid email with Valid Password
+        print("Invalid email with Valid Password")
+        self.driver.find_element_by_xpath(login_page_email_field).clear()
+        self.driver.find_element_by_xpath(login_page_email_field).send_keys(INVALEMAIL)
+        self.driver.find_element_by_xpath(login_page_password_field).clear()
+        self.driver.find_element_by_xpath(login_page_password_field).send_keys(PASSWORD)
+        login_error_check(self, "Invalid login")
+        print("Appropriate errormessage is displayed")
+
+        # Valid Credentials
+        print("Valid Credentials")
+        self.driver.find_element_by_xpath(login_page_email_field).clear()
+        self.driver.find_element_by_xpath(login_page_password_field).clear()
+        self.driver.find_element_by_xpath(login_page_email_field).send_keys(EMAIL)
+        self.driver.find_element_by_xpath(login_page_password_field).send_keys(PASSWORD)
+        self.driver.find_element_by_xpath(login_page_login_button).click()
+        print("user is now logged in.  Error messaging test case completed as passed")
+
+        # Assert user has navigated to dashboard and is logged in to the correct account
+        print("Assert user has navigated to dashboard")
+        self.driver.find_element_by_xpath(dashboard_title).is_displayed()
+        print("User has navigated to dashboard")
+
+        # Select profile and Assert user is logged into correct account
+        print("Select profile and Assert user is logged into correct account")
+        self.driver.find_element_by_xpath(dashboard_bar_profile).click()
+        click_text(self, text= "Edit Profile")
+        title = self.driver.find_element_by_xpath(edit_profile_title).text
+        self.assertTrue(title, 'Profile')
+        email_text = self.driver.find_element_by_xpath(edit_profile_email_text).text
+        self.assertTrue(email_text, EMAIL)
+        print("On Profile Page, Email is correct")
+
+        # Log out
+        print("Log Out")
+        self.driver.find_element_by_xpath(edit_profile_menu).click()
+        self.driver.find_element_by_xpath(menu_home).is_displayed()
+        self.driver.find_element_by_xpath(menu_logout).click()
+        self.driver.find_element_by_xpath(home_login_button).is_displayed()
+        print("User is now logged out Test Completed as passed")
+
+        print('*** Test is Complete *** ')
 
     def takeDown(self):
         self.driver.quit()
 
 if __name__ == '__main__':
-    suite = unittest.TestLoader().loadTestsFromTestCase(create_account)
+    suite = unittest.TestLoader().loadTestsFromTestCase(LoginTest)
     unittest.TextTestRunner(verbosity=2).run(suite)
