@@ -4,6 +4,7 @@ import datetime
 import time
 # Import tests   FileName as Class
 import TestSuite.Login as LoginTest
+import TestSuite.GetTheApp as GetTheAppTest
 from Methods.run_test import test_run
 from time import sleep
 # Returns abs path relative to this file instead of cwd
@@ -17,7 +18,12 @@ trace = []
 tests = [
 
     # Example test account creation  Class.Class()method
-    LoginTest.LoginTest().testLogin,
+    
+    #Get The App Test
+    GetTheAppTest.GetTheAppTest().testGetTheApp(),
+
+    # #Login Test
+    LoginTest.LoginTest().testLogin(),
 
 ]
 

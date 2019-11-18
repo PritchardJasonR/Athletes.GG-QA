@@ -8,11 +8,9 @@ from appium.webdriver.common.mobileby import MobileBy
 from time import sleep
 
 def des_cap(self):
-     
     PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
     )
-
     desired_caps = {
     "automationName": "UiAutomator2",
     "platformName": "Android",
@@ -26,8 +24,8 @@ def des_cap(self):
     }
 
     driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
-    driver.implicitly_wait(5000)
-
+    driver.implicitly_wait(20)
+    
     return driver
 
 def no_reset_caps(self):
@@ -49,10 +47,25 @@ def no_reset_caps(self):
     }
 
     driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
-    driver.implicitly_wait(5000)
+    driver.implicitly_wait(20)
 
     return driver
 
-    
+def play_store_caps(self):
+    desired_caps = {
+    "automationName": "UiAutomator2",
+    "platformName": "Android",
+    "appPackage": "com.android.vending",
+    "appWaitActivity": ".AssetBrowserActivity",
+    "autoGrantPermissions": "true",
+    "ignoreUnimportantViews": "true",
+    "deviceName": "Android",
+    "noReset": "true",
+    "appActivity": ".AssetBrowserActivity",
+    "uninstallOtherPackages": "gg.athletes.app"
+    }
 
+    driver = webdriver.Remote('http://localhost:4723/wd/hub', desired_caps)
+    driver.implicitly_wait(20)
 
+    return driver
