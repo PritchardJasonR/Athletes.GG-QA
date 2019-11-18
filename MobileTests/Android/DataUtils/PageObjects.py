@@ -1,4 +1,11 @@
 
+# Play Store Home
+play_search_bar = 'com.android.vending:id/search_bar_hint' # text= "Search for apps & games"
+play_search_text_input = "com.android.vending:id/search_bar_text_input"
+play_athletes_id = "App: athletes.gg - Follow Esports Athletes and Events Athletes.gg Inc. Star rating: 4.8 Installed"
+play_install_button = "com.android.vending:id/right_button"
+play_uninstall_button = "com.android.vending:id/left_button"
+play_install_status = "com.android.vending:id/status_text"
 
 # Home Page
 home_ident = "//android.view.ViewGroup/android.widget.TextView"

@@ -24,8 +24,11 @@ class LoginTest(unittest.TestCase):
     def testLogin(self):
         self.setUp()
         """
-        Follow the Test Pad Account Creation Test Case
-        @https://lncasoftware.ontestpad.com/script/1029
+        Follow the Test Login Case
+        Approach
+        1. Assert login page selectors and text 
+        2. Porper error messaging and invalid inputs at login
+        3. login with valid credentials and assert user is logged into correct account
         """
         print("Driver created!")
         print("TEST STARTED!")
@@ -141,11 +144,7 @@ class LoginTest(unittest.TestCase):
         self.driver.find_element_by_xpath(menu_logout).click()
         self.driver.find_element_by_xpath(home_login_button).is_displayed()
         print("User is now logged out Test Completed as passed")
-
         print('*** Test is Complete *** ')
-
-    def takeDown(self):
-        self.driver.quit()
 
 if __name__ == '__main__':
     suite = unittest.TestLoader().loadTestsFromTestCase(LoginTest)
