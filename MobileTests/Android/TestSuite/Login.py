@@ -32,7 +32,7 @@ class LoginTest(unittest.TestCase):
         """
         print("Driver created!")
         print("TEST STARTED!")
-
+        self.driver.implicitly_wait(20)
         # Constants
         EMAIL = 'z.timgranger@gmail.com'
         INVALEMAIL = 'ztim#gmail.co'

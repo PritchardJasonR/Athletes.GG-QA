@@ -20,11 +20,10 @@ PATH = lambda p: os.path.abspath(
 class GetTheAppTest(unittest.TestCase):
     def setUp(self):
         self.driver = play_store_caps(self)
-        self.driver.quit()
 
     def testGetTheApp(self):
         self.setUp()
-        self.driver.implicitly_wait(30)
+        self.driver.implicitly_wait(20)
         """
         Test Objectives
         1. Uninstalling the app then downloading from play store. 
@@ -70,24 +69,26 @@ class GetTheAppTest(unittest.TestCase):
         # check if uninstall is visible if so uninstall it otherwise install app
         print("check if uninstall is visible if so uninstall it ")
         try:
+            self.driver.implicitly_wait(5)
             find_by_text(self, text="Uninstall")
             print("Uninstall Text Found!")
             click_text(self, text= "Uninstall")
             self.driver.implicitly_wait(90)
             click_text(self, text= "Install")
             click_text(self, text="open")
+            self.driver.implicitly_wait(20)
             pass
         except Exception as e:
             print("App is not installed Lets Install it!")
             click_text(self, text= "Install")
-            self.driver.implicitly_wait(120)
+            self.driver.implicitly_wait(20)
             self.driver.find_element_by_id(play_uninstall_button)
             pass
         print("app is now installed")
         try:
             self.driver.find_element_by_id(play_install_status)
             print("app is still installing")
-            sleep(30)
+            sleep(40)
             pass
         except Exception as e:
             print("Either app has finished or test has a problem")
@@ -151,6 +152,7 @@ class GetTheAppTest(unittest.TestCase):
 
         # Assert user has navigated to dashboard and is logged in to the correct account
         print("Assert user has navigated to dashboard")
+        sleep(3)
         self.driver.find_element_by_id("com.android.packageinstaller:id/permission_allow_button").click()
         self.driver.find_element_by_xpath(dashboard_title).is_displayed()
         print("User has navigated to dashboard")
