@@ -20,10 +20,10 @@ tests = [
     # Example test account creation  Class.Class()method
     
     #Get The App Test
-    GetTheAppTest.GetTheAppTest().testGetTheApp(),
+    GetTheAppTest.GetTheAppTest().testGetTheApp,
 
     # #Login Test
-    LoginTest.LoginTest().testLogin(),
+    # LoginTest.LoginTest().testLogin
 
 ]
 
