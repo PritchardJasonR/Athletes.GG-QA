@@ -141,6 +141,9 @@ class GetTheAppTest(unittest.TestCase):
         self.assertEquals(youtube_text,"Log In with YouTube")
         print(">> Login Page Layout Test Completed As Passed")
 
+
+        # Swipe and accept
+        self.driver.swipe(start_x=13, start_y=900, end_x=900, end_y=700, duration=800)
         # Valid Credentials
         print("Valid Credentials")
         self.driver.find_element_by_xpath(login_page_email_field).clear()

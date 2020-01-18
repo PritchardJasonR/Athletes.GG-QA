@@ -3,6 +3,7 @@ import traceback
 import datetime
 import time
 # Import tests   FileName as Class
+import TestSuite.SearchAthlete as SearchAthleteTest
 import TestSuite.Login as LoginTest
 import TestSuite.GetTheApp as GetTheAppTest
 from Methods.run_test import test_run
@@ -19,11 +20,14 @@ tests = [
 
     # Example test account creation  Class.Class()method
     
-    #Get The App Test
-    GetTheAppTest.GetTheAppTest().testGetTheApp,
+    # #Get The App Test
+    # GetTheAppTest.GetTheAppTest().testGetTheApp,
 
-    # #Login Test
-    # LoginTest.LoginTest().testLogin
+    # # #Login Test
+    # LoginTest.LoginTest().testLogin,
+
+    # Search Athlete Test
+    SearchAthleteTest.SearchAthleteTest().testSearchAthlete,
 
 ]
 
