@@ -12,31 +12,86 @@ from DataUtils.PageObjects import *
 user_email = "fmui_testing@legrand.us"
 user_password = "Testing1"
 
-def login_function(self):
-     
-    self.driver.find_element_by_accessibility_id('EmailEntry').is_displayed()
-    self.driver.find_element_by_accessibility_id('EmailEntry').send_keys(user_email)
-    self.driver.find_element_by_accessibility_id('PasswordEntry').send_keys(user_password)
-    self.driver.find_element_by_xpath(l_btn).click()
-    self.assertTrue(self.driver.find_element_by_accessibility_id(d_slct_facility).is_displayed())
-    print('Logged in')
-     
+def search_results(self, text, results_in_list):
+    if any(text in s for s in results_in_list):
+        return True
+    else:
+        return False
 
-def select_account(self): 
-    self.driver.swipe(start_x=13, start_y=900, end_x=900, end_y=700, duration=800)
+def athlete_cards_text(self):
     self.driver.implicitly_wait(10)
-    self.driver.find_element_by_xpath(m_settings_no_site).is_displayed()
-    self.driver.find_element_by_xpath(m_settings_no_site).click()
-    self.driver.implicitly_wait(10)
-    self.driver.find_element_by_xpath(m_account).is_displayed()
-    self.driver.find_element_by_xpath(m_account).click()
-    print('Account selected')
+    card_list = []
+    xpath = "//android.view.ViewGroup/android.view.ViewGroup["
+    xpathend = "]/android.view.ViewGroup[2]/android.widget.TextView[1]"
+    for index in range(1, 15):
+        path = f"{xpath}{index}{xpathend}"
+        self.driver.implicitly_wait(1)
+        if len(self.driver.find_elements(By.XPATH, path)) > 0:
+            card_list.append(self.driver.find_element_by_xpath(f"{xpath}{index}{xpathend}").text)
+        else:
+            break
+    return card_list
 
+def user_login(self, email, password):
+    self.driver.find_element_by_xpath(login_page_email_field).clear()
+    self.driver.find_element_by_xpath(login_page_email_field).send_keys(email)
+    self.driver.find_element_by_xpath(login_page_password_field).clear()
+    self.driver.find_element_by_xpath(login_page_password_field).send_keys(password)
+    self.driver.find_element_by_xpath(login_page_login_button).click()
+
+    # Assert user has navigated to dashboard and is logged in to the correct account
+    self.driver.find_element_by_xpath(dashboard_title).is_displayed()
+    print("User has navigated to dashboard")
+
+def precondition(self):
+
+     #Assert Login page loaded
+    print("Assert Login page loaded")
+    self.driver.implicitly_wait(20)
+    sleep(2)
+    self.driver.find_element_by_xpath(home_login_button).is_displayed()
+    print("Login button visible")
+
+    #click Button and assert user is at login page
+    print("Click Login Button and assert user is at login page")
+    self.driver.find_element_by_xpath(home_login_button).click()
+    self.assertTrue(visible_xpath_assert(self, element= login_page_title))
+    print("User has navigated to Login Page")
+
+    # Assert Login Page Layout
+    print("Assert Login Page Layout")
+    self.driver.find_element_by_xpath(login_page_title).is_displayed()
+    self.assertTrue(visible_xpath_assert(self, element=login_page_email_icon))
+    self.assertTrue(visible_xpath_assert(self, element=login_page_email_field))
+    self.assertTrue(visible_xpath_assert(self, element=login_page_password_icon))
+    self.assertTrue(visible_xpath_assert(self, element=login_page_password_field))
+    self.assertTrue(visible_xpath_assert(self, element=login_page_login_button))
+    self.assertTrue(visible_xpath_assert(self, element=login_page_forgot_password_button))
+    self.assertTrue(visible_xpath_assert(self, element=login_page_facebook))
+    self.assertTrue(visible_xpath_assert(self, element=login_page_discord))
+    self.assertTrue(visible_xpath_assert(self, element=login_page_twitch))
+    self.assertTrue(visible_xpath_assert(self, element=login_page_twitter))
+    self.assertTrue(visible_xpath_assert(self, element=login_page_youtube))
+    
+    logbutton_text = self.driver.find_element_by_xpath(login_page_login_button).text
+    forgotbutton_text = self.driver.find_element_by_xpath(login_page_forgot_password_button).text
+    facebook_text = self.driver.find_element_by_xpath(login_page_facebook).text
+    discord_text = self.driver.find_element_by_xpath(login_page_discord).text
+    twitch_text = self.driver.find_element_by_xpath(login_page_twitch).text
+    twitter_text = self.driver.find_element_by_xpath(login_page_twitter).text
+    youtube_text = self.driver.find_element_by_xpath(login_page_youtube).text
+
+    self.assertEquals(logbutton_text, "LOG IN")
+    self.assertEquals(forgotbutton_text, "Forgot Password")
+    self.assertEquals(facebook_text,"Log In with Facebook")
+    self.assertEquals(discord_text,"Log In with Discord")
+    self.assertEquals(twitch_text,"Log In with Twitch")
+    self.assertEquals(twitter_text,"Log In with Twitter")
+    self.assertEquals(youtube_text,"Log In with YouTube")
+    print(">> Login Page Layout Test Completed As Passed")
+        
 def swipe(self):
     self.driver.swipe(start_x=13, start_y=900, end_x=900, end_y=700, duration=800)
-
-def swipe_close(self):
-    self.driver.swipe(start_x=900, start_y=700, end_x=13, end_y=900, duration=800)
 
 def add_new_category(self, text):
     self.driver.find_element_by_xpath(s_add_new).is_displayed()
@@ -57,24 +112,6 @@ def login_error_check(self, text):
     err = self.driver.find_element_by_xpath(login_invalid_text).text
     self.assertEquals(err, text ,"Wrong error message is displayed")
     self.driver.find_element_by_xpath(login_invalid_ok).click()    
-
-
-def user_login(self, email, password):
-    self.driver.implicitly_wait(10)
-    # Assert Home page is Loaded
-    self.assertTrue(visible_xpath_assert(self, element= l_page_ident),'User is not on login page')
-    
-    # Selectors for custom function
-    login_button = self.driver.find_element_by_xpath('//android.view.ViewGroup[@content-desc="LoginButton"]/android.view.ViewGroup[1]/android.view.View')
-    email_field = self.driver.find_element_by_accessibility_id('EmailEntry')
-    password_field = self.driver.find_element_by_accessibility_id('PasswordEntry')
-
-    email_field.send_keys(email)
-    password_field.send_keys(password)
-    login_button.click()
-    # Assert user has been navigated to the home page after logging in
-    self.driver.implicitly_wait(10)
-    self.assertTrue(self.driver.find_element_by_id('android:id/search_edit_frame').is_displayed())
 
 def click_text(self, text):
     self.driver.find_element_by_xpath('//*[contains(@text, "{}")]'.format(text)).click()
@@ -315,69 +352,3 @@ def state_assertion(self):
         print('Matches state abbreviation')      
     else: 
         raise AssertionError('State abbreviation is incorrect')
-
-def state_func(self): 
-    #set up 
-    all_states = ["AL", "AK", "AZ", "AR", "CA", "CO", "CT", "DC", "DE", "FL", "GA", 
-          "HI", "ID", "IL", "IN", "IA", "KS", "KY", "LA", "ME", "MD", 
-          "MA", "MI", "MN", "MS", "MO", "MT", "NE", "NV", "NH", "NJ", 
-          "NM", "NY", "NC", "ND", "OH", "OK", "OR", "PA", "RI", "SC", 
-          "SD", "TN", "TX", "UT", "VT", "VA", "WA", "WV", "WI", "WY"]
-    return all_states
-
-def rv_card_items(self):
-    self.driver.implicitly_wait(2000)
-    card_xpath = '//android.view.ViewGroup[@content-desc="ScrollViewLocations"]/android.view.ViewGroup['
-    card_xpath_end = ']/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.View'
-    card_title_xpath = '(//android.widget.TextView[@content-desc="TVTitleLabel"])['
-    card_title_xpathend = "]"
-    card_mac = '(//android.widget.TextView[@content-desc="MacAddress"])['
-    card_mac_end = ']'
-    card_signal = '(//android.view.View[@content-desc="SignalIcon"])['
-    card_signal_end = ']'
-    card_batt = '(//android.view.View[@content-desc="BatteryIcon"])['
-    card_battend = ']'
-    card_fav = '(//android.widget.Button[@content-desc="CheckLabel"])['
-    card_fav_end = ']'
-    card_find_device = '(//android.widget.Button[@content-desc="DeviceIdentifyBtn"])['
-    card_find_device_end = ']'
-    for index in range(1, 20):
-        card_path = f"{card_xpath}{index}{card_xpath_end}"
-        card_titles = f'{card_title_xpath}{index}{card_title_xpathend}'
-        card_mac_path = f'{card_mac}{index}{card_mac_end}'
-        card_signal_path = f'{card_signal}{index}{card_signal_end}'
-        card_batt_path = f'{card_batt}{index}{card_battend}'
-        card_fav_path = f'{card_fav}{index}{card_fav_end}'
-        card_find_device_path = f'{card_find_device}{index}{card_find_device_end}'
-        self.driver.implicitly_wait(1)
-        if len(self.driver.find_elements(By.XPATH, card_path)) > 0:
-            self.driver.implicitly_wait(1)
-            visible_xpath_assert(self, element= card_titles)
-            visible_xpath_assert(self, element= card_mac_path)
-            visible_xpath_assert(self, element= card_signal_path)
-            device_name = self.driver.find_element_by_xpath(card_titles).text
-            if not device_name == 'LMRC-611MCC':
-                print('Leaf Device Found')
-                self.driver.find_element_by_xpath(card_titles).click()
-                self.driver.implicitly_wait(10)
-                self.assertTrue(visible_accessibility_id_assert(self, element= rv_drawer_ident))
-                self.assertTrue(visible_accessibility_id_assert(self, element= rv_drawer_device_batt))
-                TouchAction(self.driver).tap(x=200, y=1080).perform()                
-                visible_xpath_assert(self, element= card_fav_path)
-                visible_xpath_assert(self, element= card_find_device_path)
-            else:
-                print('LMRC Found')
-                self.driver.find_element_by_xpath(card_titles).click()
-                self.driver.implicitly_wait(500)
-                self.assertTrue(visible_accessibility_id_assert(self, element= rv_drawer_ident))
-                self.assertFalse(visible_accessibility_id_assert(self, element= rv_drawer_device_batt))
-                TouchAction(self.driver).tap(x=200, y=1080).perform()
-                print('no battery place holder found')
-                visible_xpath_assert(self, element= card_fav_path)
-                visible_xpath_assert(self, element= card_find_device_path)
-
-def search_results(self, text, results_in_list):
-    if any(text in s for s in results_in_list):
-        return True
-    else:
-        return False

@@ -1,3 +1,25 @@
+# Search top
+search_main_bar = '//android.view.ViewGroup[3]/android.widget.EditText'
+search_main_bar_clear = '//android.view.ViewGroup[3]/android.view.ViewGroup/android.widget.TextView'
+search_main_top = '//android.widget.Button[@content-desc="Top, tab, 1 of 5"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'
+search_main_athletes = '//android.widget.Button[@content-desc="Athletes, tab, 2 of 5"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'
+search_main_events = '//android.widget.Button[@content-desc="Events, tab, 3 of 5"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'
+search_main_games = '//android.widget.Button[@content-desc="Games, tab, 4 of 5"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'
+
+# search_athletes
+search_athletes_card1_text = '//android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[1]'
+search_athletes_card1_points = '//android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[2]'
+search_athletes_card2_text = '//android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[2]/android.widget.TextView[1]'
+search_athletes_card2_points = '//android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[2]/android.widget.TextView[2]'
+search_athletes_card3_text = '//android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup[2]/android.widget.TextView[1]'
+search_athletes_card3_points = '//android.view.ViewGroup/android.view.ViewGroup[3]/android.view.ViewGroup[2]/android.widget.TextView[2]'
+search_athletes_card4_text = '//android.view.ViewGroup/android.view.ViewGroup[4]/android.view.ViewGroup[2]/android.widget.TextView[1]'
+search_athletes_card4_points = '//android.view.ViewGroup/android.view.ViewGroup[4]/android.view.ViewGroup[2]/android.widget.TextView[2]'
+search_athletes_card1_fav = '//android.view.ViewGroup[1]/android.view.ViewGroup[3]/android.widget.TextView'
+search_athletes_card2_fav = '//android.view.ViewGroup[2]/android.view.ViewGroup[3]/android.widget.TextView'
+search_athletes_card3_fav = '//android.view.ViewGroup[3]/android.view.ViewGroup[3]/android.widget.TextView'
+search_athletes_card4_fav = '//android.view.ViewGroup[4]/android.view.ViewGroup[3]/android.widget.TextView'
+
 
 # Play Store Home
 play_search_bar = 'com.android.vending:id/search_bar_hint' # text= "Search for apps & games"
