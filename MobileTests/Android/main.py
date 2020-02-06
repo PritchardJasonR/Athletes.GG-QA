@@ -8,6 +8,7 @@ import TestSuite.Login as LoginTest
 import TestSuite.GetTheApp as GetTheAppTest
 import TestSuite.LoginSearchLoad as LoginSearchLoadTest
 import TestSuite.SearchEvent as SearchEvent
+import TestSuite.SearchGames as SearchGames
 #End of Test Imports
 from Methods.run_test import test_run
 from time import sleep
@@ -22,8 +23,8 @@ trace = []
 tests = [
     # Example test account creation  Class.Class()method
     
-    #Get The App Test
-    GetTheAppTest.GetTheAppTest().testGetTheApp,
+    # #Get The App Test
+    # GetTheAppTest.GetTheAppTest().testGetTheApp,
 
     # # #Login Test
     # LoginTest.LoginTest().testLogin,
@@ -34,9 +35,8 @@ tests = [
     # # Search Event Test
     # SearchEvent.SearchEventTest().testSearchEvent
 
-
-
-    
+    # Search Games
+    # SearchGames.SearchGamesTest().testSearchGames
 
 ]
 

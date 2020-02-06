@@ -18,6 +18,21 @@ def search_results(self, text, results_in_list):
     else:
         return False
 
+def games_cards_text(self):
+    self.driver.implicitly_wait(10)
+    card_list = []
+    xpath = "//android.view.ViewGroup["
+    xpathend = "]/android.view.ViewGroup[2]/android.widget.TextView[1]"
+    for index in range(1, 15):
+        path = f"{xpath}{index}{xpathend}"
+        self.driver.implicitly_wait(1)
+        if len(self.driver.find_elements(By.XPATH, path)) > 0:
+            card_list.append(self.driver.find_element_by_xpath(f"{xpath}{index}{xpathend}").text)
+        else:
+            break
+    return card_list
+
+
 def events_cards_text(self):
     self.driver.implicitly_wait(10)
     card_list = []

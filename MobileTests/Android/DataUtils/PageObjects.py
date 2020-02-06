@@ -1,3 +1,9 @@
+#search Games
+search_games_card1_text = "//android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[1]"
+search_games_card1_points = '//android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[2]'
+search_games_card1_fav = '//android.view.ViewGroup[1]/android.view.ViewGroup[3]/android.widget.TextView'
+search_games_card2_text = '//android.view.ViewGroup[2]/android.view.ViewGroup[2]/android.widget.TextView[1]'
+search_games_card3_text ='//android.view.ViewGroup[3]/android.view.ViewGroup[2]/android.widget.TextView[1]'
 # Search Events
 search_events_card1_text = '//android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[1]'
 search_events_card1_type = '//android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[2]'
