@@ -10,13 +10,10 @@ from time import sleep
 from DataUtils.PageObjects import *
 from DataUtils.desired_capabilities import *
 from Methods.custom_functions import *
-
-
 # Returns abs path relative to this file instead of cwd
 PATH = lambda p: os.path.abspath(
     os.path.join(os.path.dirname(__file__), p)
 )
-
 class SearchAthleteTest(unittest.TestCase):
     def setUp(self):
         self.driver = des_cap(self)
@@ -28,7 +25,6 @@ class SearchAthleteTest(unittest.TestCase):
         1. Precondition Successfully Login and Navigate to Searching for Athletes
         2. Search for 1 Result
         3. Search for a Result not to be there
-        4. Search for Results without ZeRo
         """
         #constants
         EMAIL = 'z.timgranger@gmail.com'
@@ -84,20 +80,7 @@ class SearchAthleteTest(unittest.TestCase):
         print("ZeRo found in placeholder 1")
 
         """
-        3. Search for 0 Results to be there
-        # search for ALANFORD
-        # assert no cards are displayed
-        """
-        # 
-        print("search for ALANFORD and no results are displayed")
-        self.driver.find_element_by_xpath(search_main_bar).clear()
-        self.driver.find_element_by_xpath(search_main_bar).send_keys(SEARCH2)
-        sleep(10)
-        self.assertFalse(visible_xpath_assert(self, element= search_athletes_card2_text))
-        print("no results are displayed")
-        
-        """
-        4. Search for Results without ZeRo
+        3. Search for Results without ZeRo
         # search for Liquid
         # assert Cards are displayed
         # assert ZeRo is not displayed

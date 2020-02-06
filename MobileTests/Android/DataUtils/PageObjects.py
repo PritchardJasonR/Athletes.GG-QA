@@ -1,3 +1,11 @@
+# Search Events
+search_events_card1_text = '//android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[1]'
+search_events_card1_type = '//android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[2]'
+search_events_card_points = '//android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[3]'
+search_events_card_game = '//android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[4]'
+search_events_card_upcoming = '//android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[5]'
+search_events_card_notify = '//android.view.ViewGroup[1]/android.view.ViewGroup[3]/android.widget.TextView'
+
 # Search top
 search_main_bar = '//android.view.ViewGroup[3]/android.widget.EditText'
 search_main_bar_clear = '//android.view.ViewGroup[3]/android.view.ViewGroup/android.widget.TextView'
@@ -5,7 +13,10 @@ search_main_top = '//android.widget.Button[@content-desc="Top, tab, 1 of 5"]/and
 search_main_athletes = '//android.widget.Button[@content-desc="Athletes, tab, 2 of 5"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'
 search_main_events = '//android.widget.Button[@content-desc="Events, tab, 3 of 5"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'
 search_main_games = '//android.widget.Button[@content-desc="Games, tab, 4 of 5"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'
-
+search_top_athletes_div = '//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.widget.TextView'
+search_top_events_div = '//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[7]/android.view.ViewGroup/android.widget.TextView'
+search_top_card1_fav = '//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[3]/android.widget.TextView'
+search_top_card6_fav = '//android.view.ViewGroup/android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[8]/android.view.ViewGroup[3]/android.widget.TextView'
 # search_athletes
 search_athletes_card1_text = '//android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[1]'
 search_athletes_card1_points = '//android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[2]'
@@ -50,11 +61,13 @@ login_invalid_text = "//android.view.ViewGroup[2]/android.view.ViewGroup/android
 login_invalid_ok = "//android.view.ViewGroup[2]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.Button/android.widget.TextView"
 
 # Dashboard Athletes Page
+dashboard_athletes_div = '//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.widget.TextView'
+dashboard_events_div = '//android.view.ViewGroup[7]/android.view.ViewGroup/android.widget.TextView'
 dashboard_title = "//android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView"
 dashboard_menu = "//android.view.ViewGroup[1]/android.view.ViewGroup[3]/android.view.ViewGroup/android.widget.Button/android.widget.TextView"
-dashboard_athletes_tab = '//android.widget.Button[@content-desc="Athletes, tab, 1 of 3"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'
-dashboard_events_tab = '//android.widget.Button[@content-desc="Events, tab, 2 of 3"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'
-dashboard_games_tab = '//android.widget.Button[@content-desc="Games, tab, 3 of 3"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'
+dashboard_athletes_tab = '//android.widget.Button[@content-desc="Athletes, tab, 2 of 5"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'
+dashboard_events_tab = '//android.widget.Button[@content-desc="Events, tab, 3 of 5"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'
+dashboard_games_tab = '//android.widget.Button[@content-desc="Games, tab, 4 of 5"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'
 
 # Dashboard Bar
 dashboard_bar_home = '//android.widget.Button[@content-desc="Home, tab, 1 of 5"]/android.view.ViewGroup/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'

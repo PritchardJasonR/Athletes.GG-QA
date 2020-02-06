@@ -18,6 +18,20 @@ def search_results(self, text, results_in_list):
     else:
         return False
 
+def events_cards_text(self):
+    self.driver.implicitly_wait(10)
+    card_list = []
+    xpath = "//android.view.ViewGroup/android.view.ViewGroup["
+    xpathend = "]/android.view.ViewGroup[2]/android.widget.TextView[1]"
+    for index in range(1, 15):
+        path = f"{xpath}{index}{xpathend}"
+        self.driver.implicitly_wait(1)
+        if len(self.driver.find_elements(By.XPATH, path)) > 0:
+            card_list.append(self.driver.find_element_by_xpath(f"{xpath}{index}{xpathend}").text)
+        else:
+            break
+    return card_list
+
 def athlete_cards_text(self):
     self.driver.implicitly_wait(10)
     card_list = []
@@ -43,6 +57,12 @@ def user_login(self, email, password):
     self.driver.find_element_by_xpath(dashboard_title).is_displayed()
     print("User has navigated to dashboard")
 
+def user_login_time(self, email, password):
+    self.driver.find_element_by_xpath(login_page_email_field).clear()
+    self.driver.find_element_by_xpath(login_page_email_field).send_keys(email)
+    self.driver.find_element_by_xpath(login_page_password_field).clear()
+    self.driver.find_element_by_xpath(login_page_password_field).send_keys(password)
+    
 def precondition(self):
 
      #Assert Login page loaded

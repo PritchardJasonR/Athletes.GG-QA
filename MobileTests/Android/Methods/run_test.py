@@ -2,6 +2,7 @@ import os
 import traceback
 import datetime
 from time import sleep
+from appium import webdriver
 
 def test_run(test_name, passes, fails, trace):
 

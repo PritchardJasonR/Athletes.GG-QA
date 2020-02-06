@@ -1,0 +1,32 @@
+[][][][][][][][][][ TEST RESULTS ][][][][][][][][][][]][][][][][]
+
+Tests took 477.13821029663086 Seconds to run
+
+Out of 4 tests ran, 3 passed and 1 failed
+
+tests that passed[{'testLogin'}, {'testSearchAthlete'}, {'testSearchEvent'}]
+
+tests that failed ['testGetTheApp']
+
+ >>>>>>>   Tracebacks   <<<<<<<<<<
+******************* Start Trace  *****************************
+
+  File "c:\Users\Pritc\Desktop\AGG\Athletes.GG-QA\MobileTests\Android\Methods\run_test.py", line 11, in test_run
+    test_name()
+  File "c:\Users\Pritc\Desktop\AGG\Athletes.GG-QA\MobileTests\Android\TestSuite\GetTheApp.py", line 166, in testGetTheApp
+    email_text = self.driver.find_element_by_xpath(edit_profile_email_text).text
+  File "C:\Users\Pritc\AppData\Local\Programs\Python\Python37\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 394, in find_element_by_xpath
+    return self.find_element(by=By.XPATH, value=xpath)
+  File "C:\Users\Pritc\AppData\Local\Programs\Python\Python37\lib\site-packages\appium\webdriver\webdriver.py", line 276, in find_element
+    'value': value})['value']
+  File "C:\Users\Pritc\AppData\Local\Programs\Python\Python37\lib\site-packages\selenium\webdriver\remote\webdriver.py", line 321, in execute
+    self.error_handler.check_response(response)
+  File "C:\Users\Pritc\AppData\Local\Programs\Python\Python37\lib\site-packages\appium\webdriver\errorhandler.py", line 29, in check_response
+    raise wde
+  File "C:\Users\Pritc\AppData\Local\Programs\Python\Python37\lib\site-packages\appium\webdriver\errorhandler.py", line 24, in check_response
+    super(MobileErrorHandler, self).check_response(response)
+  File "C:\Users\Pritc\AppData\Local\Programs\Python\Python37\lib\site-packages\selenium\webdriver\remote\errorhandler.py", line 242, in check_response
+    raise exception_class(message, screen, stacktrace)
+
+******************* END TRACE *******************************
+
