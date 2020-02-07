@@ -9,6 +9,7 @@ import TestSuite.GetTheApp as GetTheAppTest
 import TestSuite.LoginSearchLoad as LoginSearchLoadTest
 import TestSuite.SearchEvent as SearchEvent
 import TestSuite.SearchGames as SearchGames
+import TestSuite.SearchChar as SearchChar
 #End of Test Imports
 from Methods.run_test import test_run
 from time import sleep
@@ -37,6 +38,9 @@ tests = [
 
     # Search Games
     # SearchGames.SearchGamesTest().testSearchGames
+
+    # Search Char
+    SearchChar.SearchCharTest().testSearchChar
 
 ]
 
