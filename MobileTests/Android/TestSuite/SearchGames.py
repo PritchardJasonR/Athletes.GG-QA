@@ -21,9 +21,9 @@ class SearchGamesTest(unittest.TestCase):
     def testSearchGames(self):
         self.setUp()
         """
-        Test Search Athlete
+        Test Search Games
         1. Precondition Successfully Login and Navigate to Searching for Events
-        2. Verify Event page populated correctly
+        2. Verify games page populated correctly
         3. Search for 1 Result with partial input
         4. Search for a different result
         5. Search for a Result not to be there
@@ -37,7 +37,7 @@ class SearchGamesTest(unittest.TestCase):
         SEARCH3 = 'Super Smash Bros. Ultimate'
 
         """
-        1. Precondition Successfully Login and Navigate to Searching for Athletes
+        1. Precondition Successfully Login and Navigate to Searching for Games
         """
         # Assert Login page Loaded successfully
         print("Assert Login page Loaded successfully")

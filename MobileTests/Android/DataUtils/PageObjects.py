@@ -1,3 +1,11 @@
+#search Chars
+search_chars_card1_text = '//android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[1]'
+search_chars_card1_game = '//android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[2]'
+search_chars_card1_points = '//android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[3]'
+search_chars_card1_heart = '//android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup[3]/android.widget.TextView'
+search_chars_card2_text = '//android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[2]/android.widget.TextView[1]'
+search_chars_card3_text = '//android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[2]/android.widget.TextView[1]'
+
 #search Games
 search_games_card1_text = "//android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[1]"
 search_games_card1_points = '//android.view.ViewGroup[1]/android.view.ViewGroup[2]/android.widget.TextView[2]'
@@ -19,6 +27,7 @@ search_main_top = '//android.widget.Button[@content-desc="Top, tab, 1 of 5"]/and
 search_main_athletes = '//android.widget.Button[@content-desc="Athletes, tab, 2 of 5"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'
 search_main_events = '//android.widget.Button[@content-desc="Events, tab, 3 of 5"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'
 search_main_games = '//android.widget.Button[@content-desc="Games, tab, 4 of 5"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'
+search_main_chars ='//android.widget.Button[@content-desc="Characters, tab, 5 of 5"]/android.view.ViewGroup/android.view.ViewGroup/android.widget.TextView'
 search_top_athletes_div = '//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[1]/android.view.ViewGroup/android.widget.TextView'
 search_top_events_div = '//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[7]/android.view.ViewGroup/android.widget.TextView'
 search_top_card1_fav = '//android.widget.ScrollView/android.view.ViewGroup/android.view.ViewGroup[2]/android.view.ViewGroup[3]/android.widget.TextView'

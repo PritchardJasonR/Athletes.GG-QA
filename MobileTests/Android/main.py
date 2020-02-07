@@ -54,7 +54,7 @@ f = len(fails)
 t = p + f
 print(f'Seconds Tests took to run{end - start}')
 now = datetime.datetime.now()
-filename = f'fmui.android.testrun{now.strftime("%Y-%m-%d_%H-%M")}' #change this to however you want it to look (but no :'s or /'s since windows doesn't like those)
+filename = f'agg.android.testrun{now.strftime("%Y-%m-%d_%H-%M")}' #change this to however you want it to look (but no :'s or /'s since windows doesn't like those)
 with open(PATH(f"executions/{filename}.txt"),'w') as result:
     result.write('[][][][][][][][][][ TEST RESULTS ][][][][][][][][][][]][][][][][]\n\n')
     result.write(f'Tests took {end - start} Seconds to run\n\n')
