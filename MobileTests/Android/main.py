@@ -24,20 +24,20 @@ trace = []
 tests = [
     # Example test account creation  Class.Class()method
     
-    # #Get The App Test
-    # GetTheAppTest.GetTheAppTest().testGetTheApp,
+    #Get The App Test
+    GetTheAppTest.GetTheAppTest().testGetTheApp,
 
-    # # #Login Test
-    # LoginTest.LoginTest().testLogin,
+    # #Login Test
+    LoginTest.LoginTest().testLogin,
 
-    # # Search Athlete Test
-    # SearchAthleteTest.SearchAthleteTest().testSearchAthlete,
+    # Search Athlete Test
+    SearchAthleteTest.SearchAthleteTest().testSearchAthlete,
 
-    # # Search Event Test
-    # SearchEvent.SearchEventTest().testSearchEvent
+    # Search Event Test
+    SearchEvent.SearchEventTest().testSearchEvent,
 
     # Search Games
-    # SearchGames.SearchGamesTest().testSearchGames
+    SearchGames.SearchGamesTest().testSearchGames,
 
     # Search Char
     SearchChar.SearchCharTest().testSearchChar
